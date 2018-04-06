@@ -4,22 +4,29 @@ This script was created by following the tutorial linked below:
 
 https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 
-## Content of service implementation
-POM
-Dockerfile
-application.properties
-Application.java
-Message.java
+## Have a look into the code of the service implementation
+* microservices/pom.xml
+* microservices/Dockerfile
+* microservices/echo/pom.xml
+* microservices/echo/src/main/resources/application.yml
+* microservices/echo/src/main/java/echo/Application.java
+* microservices/echo/src/main/java/echo/Message.java
 
-## GCP Project
-Projektname: Blissfish
-Projekt-ID: blissfish-191215
-Projektnummer: 768948453873
+## Create a GCP Project
+* Projektname: Blissfish
+* Projekt-ID: blissfish-191215
+* Projektnummer: 768948453873
 
 https://console.cloud.google.com
 
-## Set some env properties
+## Create Kubernetes (K8) cluster
+`gcloud container clusters create blissfish-cluster --num-nodes=3 --zone=europe-west3-a`
+gcloud compute instances list
 
+## Add blissfish-cluster credentials to kubtctl tool 
+gcloud container clusters get-credentials blissfish-cluster
+
+## Set some env properties
 gcloud config set project blissfish-191215
 gcloud config set compute/zone europe-west3-a
 export PROJECT_ID="$(gcloud config get-value project -q)"
@@ -49,15 +56,7 @@ docker image rm gcr.io/${PROJECT_ID}/simple-service:0.0.1
 
 
 
-## Create cluster
 
-gcloud container clusters create blissfish-cluster --num-nodes=3 --zone=europe-west3-a
-
-gcloud compute instances list
-
-## Add blissfish-cluster credentials to kubtctl tool 
-
-gcloud container clusters get-credentials blissfish-cluster
 
 
 ## Push docker image to registry
