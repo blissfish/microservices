@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: echo
-        image: echo:0.0.1
+        image: gcr.io/blissfish-191215/echo:0.0.1
         ports:
         - containerPort: 80
