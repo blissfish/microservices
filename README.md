@@ -1,5 +1,5 @@
-# microservices
-## simple echo service
+# Microservices
+## Simple echo service
 This script was created by following the tutorial linked below:
 
 https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
