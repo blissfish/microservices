@@ -106,7 +106,7 @@ https://console.cloud.google.com
 `kubectl scale deployment blissfish-app --replicas=3`
 
 ## Change service version, update, build and re-deploy
-### Change version attribute in file microservices/echo/src/main/resources/application.yml
+#### Change version attribute in file microservices/echo/src/main/resources/application.yml
 `version=0.0.2`
 ### Pull the update from github & rebuild
 `cd /home/[user_name]/microservices`
@@ -135,7 +135,7 @@ https://console.cloud.google.com
 #### Use either Docker image id or name to delete an image
 `docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
-### Delete deployment
+### Delete the deployment
 `kubectl delete deployment blissfish-deployment`
 
 `docker image rm -f 4f9d0e004754`
