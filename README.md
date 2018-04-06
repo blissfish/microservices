@@ -135,6 +135,9 @@ https://console.cloud.google.com
 #### Use either Docker image id or name to delete an image
 `docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
+### Delete deployment
+`kubectl delete deployment`
+
 `docker image rm -f 4f9d0e004754`
 ### Finally delete the cluster
 `gcloud container clusters delete blissfish-cluster`
