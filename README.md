@@ -34,12 +34,10 @@ https://console.cloud.google.com
 `gcloud config set compute/zone europe-west3-a`
 
 `export PROJECT_ID="$(gcloud config get-value project -q)"`
-
-## Navigate to your home dir in the GCP shell (/home/[user_name])
-`pwd` 
-## Get the code from github, build & start run the service
+## Clone the repository from github, build & start run the service
 `git clone https://github.com/blissfish/microservices.git`
-
+### Navigate to your home dir in the GCP shell (/home/[user_name])
+`pwd` 
 `cd microservices/`
 
 `mvn clean package`
@@ -48,7 +46,7 @@ https://console.cloud.google.com
 
 `mvn spring-boot:run`
 
-## Open a 2nd shell and verify the service is running
+### Open a 2nd shell and verify the service is running
 `curl -i http://localhost:8080/api/`
 
 ## Build the echo Docker image
@@ -60,58 +58,54 @@ https://console.cloud.google.com
 ### Start the container
 `docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/echo:0.0.1`
 ### Call the service and compare output with running container process data
-`docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
+`curl -i http://localhost:8080/api/`
 
 `docker ps -s`
-## you can use the image id (docker images) to delete an image as well
-## Push docker image to registry
+## Push the Docker service image to the registry
+### First view already registered images
+`gcloud container images list`
+### Push the image to the Google Container Registry (gcr.io)
+`gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.1`
+### View registered image & meta data
+`gcloud container images list`
 
-kubectl get pods
+`gcloud container images list-tags gcr.io/blissfish-191215/echo`
 
-gcloud container images list
-gcloud docker -- push gcr.io/${PROJECT_ID}/simple-service:0.0.1
-gcloud container images list-tags gcr.io/blissfish-191215/simple-service
+`gcloud container images describe gcr.io/blissfish-191215/echo:0.0.1`
 
+### Create K8 POD deployment using the registered docker image
+`kubectl get pods`
 
-## Create k8 POD deployment using the docker image
+`kubectl run blissfish-web --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
+### Verify the deployment status 
+`kubectl get pods`
 
-kubectl run blissfish-web --image=gcr.io/${PROJECT_ID}/simple-service:0.0.1 --port 8080
+## Where is the POD running?
+`kubectl get nodes`
 
+`kubectl get pods`
 
-## Where is the POD running
+`kubectl get pod -o json blissfish-web-[use-NAME-from-get-pods-output]`
 
-kubectl get nodes
-kubectl get pods 
-kubectl get pod -o json blissfish-web-5fd67588bc-f424v
+## Vertical scaling
+`kubectl scale deployment blissfish-web --replicas=3`
 
+## Expose the service to the outside world
+### View computing instances 
+`gcloud compute instances list`
+### Create LB service and assign IP & port support to POD
+`kubectl expose deployment blissfish-web --type=LoadBalancer --port 80 --target-port 8080`
+### Verify status of the service
+`kubectl get service`
 
-## Scale
+## Call the service and  rescale
+`watch -n .5 curl --no-keepalive -i http://35.198.101.241/api`
 
-kubectl scale deployment blissfish-web --replicas=3
+`kubectl scale deployment blissfish-web --replicas=1`
 
+`kubectl scale deployment blissfish-web --replicas=3`
 
-## Create LB service and assign IP support to POD
-
-gcloud compute instances list
-kubectl expose deployment blissfish-web --type=LoadBalancer --port 80 --target-port 8080
-
-kubectl get service
-
-
-## Test and rescale
-
-
-watch -n .5 curl --no-keepalive -i http://35.198.191.48
-
-kubectl scale deployment blissfish-web --replicas=1
-kubectl scale deployment blissfish-web --replicas=3
-
-
-while sleep 5; do curl -i http://35.198.79.128; done
-while sleep 2; do curl -i http://35.198.79.128; done
-
-
-## Change version in application.properties, update and re-build
+## Change version in file application.yml, update and re-build
 
 version=0.0.2
 cd /home/mark_evertz/blissfish
@@ -128,6 +122,8 @@ kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/si
 
 
 ## Clean up
+## you can use the image id (docker images) to delete an image as well
+`docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
 gcloud container images delete [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 gcloud container images delete blissfish-191215
