@@ -100,29 +100,31 @@ https://console.cloud.google.com
 
 ## Call the service and  rescale
 `watch -n .5 curl --no-keepalive -i http://35.198.101.241/api`
-
+### Change nr of instances in 2nd GCP shell
 `kubectl scale deployment blissfish-web --replicas=1`
-
+### Observe how LB routing changes in 1st shell 
 `kubectl scale deployment blissfish-web --replicas=3`
 
-## Change version in file application.yml, update and re-build
+## Change service version, update, build and re-deploy
+### Change version attribute in file microservices/echo/src/main/resources/application.yml
+`version=0.0.2`
+### Pull the update from github & rebuild
+`cd /home/[user_name]/microservices`
 
-version=0.0.2
-cd /home/mark_evertz/blissfish
-git pull
-cd simple-service/
-mvn clean package
-docker build -t gcr.io/${PROJECT_ID}/simple-service:0.0.2 .
-gcloud docker -- push gcr.io/${PROJECT_ID}/simple-service:0.0.2
+`git pull`
 
+`cd echo/`
 
-## Rolling-Update with Kubernetes Engine
+`mvn clean package`
 
-kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/simple-service:0.0.2
+`docker build -t gcr.io/${PROJECT_ID}/echo:0.0.2 .`
 
+`gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.2`
+### Start a rolling-update with Kubernetes Engine
+`kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/echo:0.0.2`
 
 ## Clean up
-## you can use the image id (docker images) to delete an image as well
+### you can use the image id (docker images) to delete an image as well
 `docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
 gcloud container images delete [HOSTNAME]/[PROJECT-ID]/[IMAGE]
@@ -135,23 +137,19 @@ gcloud container clusters delete blissfish-cluster
 
 
 ## Spring Boot actuators
-
-
-curl -i http://localhost:8080/health
-curl -i http://localhost:8080/loggers
-curl -i http://localhost:8080/auditevents
-curl -i http://localhost:8080/beans
-curl -i http://localhost:8080/autoconfig
-curl -i http://localhost:8080/env
-curl -i http://localhost:8080/metrics
-curl -i http://localhost:8080/configprops
-curl -i http://localhost:8080/mappings
-curl -i http://localhost:8080/dump
-curl -i http://localhost:8080/info
-curl -i http://localhost:8080/trace
+`curl -i http://localhost:8080/health`
+`curl -i http://localhost:8080/loggers`
+`curl -i http://localhost:8080/auditevents`
+`curl -i http://localhost:8080/beans`
+`curl -i http://localhost:8080/autoconfig`
+`curl -i http://localhost:8080/env`
+`curl -i http://localhost:8080/metrics`
+`curl -i http://localhost:8080/configprops`
+`curl -i http://localhost:8080/mappings`
+`curl -i http://localhost:8080/dump`
+`curl -i http://localhost:8080/info`
+`curl -i http://localhost:8080/trace`
 
 ## Swagger OpenAPI
-
-
-http://www.javainuse.com/spring/boot_swagger
-http://localhost:8080/swagger-ui.html
+`http://www.javainuse.com/spring/boot_swagger`
+`http://localhost:8080/swagger-ui.html`
