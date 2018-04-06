@@ -30,18 +30,26 @@ https://console.cloud.google.com
 
 ## Set some env properties
 `gcloud config set project blissfish-191215`
+
 `gcloud config set compute/zone europe-west3-a`
+
 `export PROJECT_ID="$(gcloud config get-value project -q)"`
 
+## Navigate to your home dir in the GCP shell (/home/[user_name])
+`pwd` 
 ## Get the sample code from github
-### verify you are in your home dir in the GCP shell (/home/[user_name])
-`pwd` git clone https://github.com/blissfish/blissfish.git
-cd blissfish/blissfish-samples/
-mvn clean package 
-cd simple-service
-mvn spring-boot:run
+`git clone https://github.com/blissfish/blissfish.git`
 
-curl -i http://localhost:8080/api/message
+`cd blissfish/blissfish-samples/`
+
+`mvn clean package`
+
+`cd simple-service`
+
+`mvn spring-boot:run`
+
+## Open a 2nd shell and verify the service is running
+`curl -i http://localhost:8080/api/`
 
 
 ## Build Docker image
