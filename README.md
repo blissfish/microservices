@@ -22,7 +22,16 @@ https://console.cloud.google.com
 
 ## Create Kubernetes (K8) cluster
 `gcloud container clusters create blissfish-cluster --num-nodes=3 --zone=europe-west3-a`
+
 `gcloud compute instances list`
+
+a
+aa
+
+aaa
+
+
+
 
 ## Add blissfish-cluster credentials to kubtctl tool 
 `gcloud container clusters get-credentials blissfish-cluster`
