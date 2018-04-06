@@ -124,32 +124,47 @@ https://console.cloud.google.com
 `kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/echo:0.0.2`
 
 ## Clean up
-### you can use the image id (docker images) to delete an image as well
+### Delete the LB service
+`kubectl delete service blissfish-web`
+### Remove container images from registry
+`gcloud container images delete gcr.io/blissfish-191215/echo:0.0.1`
+
+`gcloud container images delete gcr.io/blissfish-191215/echo:0.0.2`
+
+### Remove container images from Docker repository
+#### Use either Docker image id or name to delete an image
 `docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
-gcloud container images delete [HOSTNAME]/[PROJECT-ID]/[IMAGE]
-gcloud container images delete blissfish-191215
-gcloud container images delete gcr.io/[PROJECT-ID]/quickstart-image:tag1
-docker image rm -f 4f9d0e004754
+`docker image rm -f 4f9d0e004754`
+### Finally delete the cluster
+`gcloud container clusters delete blissfish-cluster`
 
-kubectl delete service blissfish-web
-gcloud container clusters delete blissfish-cluster
-
-
-## Spring Boot actuators
+## Some fun with Spring Boot actuators
 `curl -i http://localhost:8080/health`
+
 `curl -i http://localhost:8080/loggers`
+
 `curl -i http://localhost:8080/auditevents`
+
 `curl -i http://localhost:8080/beans`
+
 `curl -i http://localhost:8080/autoconfig`
+
 `curl -i http://localhost:8080/env`
+
 `curl -i http://localhost:8080/metrics`
+
 `curl -i http://localhost:8080/configprops`
+
 `curl -i http://localhost:8080/mappings`
+
 `curl -i http://localhost:8080/dump`
+
 `curl -i http://localhost:8080/info`
+
 `curl -i http://localhost:8080/trace`
 
-## Swagger OpenAPI
+## SOme fun with Swagger/OpenAPI
 `http://www.javainuse.com/spring/boot_swagger`
+
 `http://localhost:8080/swagger-ui.html`
