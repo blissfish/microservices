@@ -10,7 +10,7 @@ spec:
   template: # create pods using pod definition in this template
     metadata:
       labels:
-        app: echo
+        app: blissfish-app
     spec:
       containers:
       - name: echo
