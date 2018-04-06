@@ -164,7 +164,7 @@ https://console.cloud.google.com
 
 `curl -i http://localhost:8080/trace`
 
-## SOme fun with Swagger/OpenAPI
+## Smme fun with Swagger/OpenAPI
 `http://www.javainuse.com/spring/boot_swagger`
 
 `http://localhost:8080/swagger-ui.html`
