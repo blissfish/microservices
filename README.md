@@ -40,28 +40,29 @@ https://console.cloud.google.com
 ## Get the code from github, build & start run the service
 `git clone https://github.com/blissfish/microservices.git`
 
-`cd blissfish/microservices/`
+`cd microservices/`
 
 `mvn clean package`
 
-`cd simple-service`
+`cd echo`
 
 `mvn spring-boot:run`
 
 ## Open a 2nd shell and verify the service is running
 `curl -i http://localhost:8080/api/`
 
-## Build Docker image
-
-`docker build -t gcr.io/${PROJECT_ID}/simple-service:0.0.1 .`
-
+## Build the echo Docker image
+`docker build -t gcr.io/${PROJECT_ID}/echo:0.0.1 .`
+### View generated images
 `docker images`
+### View running docker processes
 `docker ps -s`
+### Start the container
+`docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/echo:0.0.1`
+### Call the service and compare output with running container process data
+`docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
 
-`docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/simple-service:0.0.1`
-
-`docker image rm gcr.io/${PROJECT_ID}/simple-service:0.0.1`
-
+`docker ps -s`
 ## you can use the image id (docker images) to delete an image as well
 ## Push docker image to registry
 
@@ -130,6 +131,7 @@ kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/si
 
 gcloud container images delete [HOSTNAME]/[PROJECT-ID]/[IMAGE]
 gcloud container images delete blissfish-191215
+gcloud container images delete gcr.io/[PROJECT-ID]/quickstart-image:tag1
 docker image rm -f 4f9d0e004754
 
 kubectl delete service blissfish-web
