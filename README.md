@@ -76,7 +76,7 @@ https://console.cloud.google.com
 ### Create K8 POD deployment using the registered docker image
 `kubectl get pods`
 
-`kubectl run blissfish-app --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
+`kubectl run blissfish-deployment --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
 ### Verify the deployment status 
 `kubectl get pods`
 
@@ -85,21 +85,21 @@ https://console.cloud.google.com
 
 `kubectl get pods`
 
-`kubectl get pod -o json blissfish-web-[use-NAME-from-get-pods-output]`
+`kubectl get pod -o json blissfish-deployment-[use-NAME-from-get-pods-output]`
 
 ## Vertical scaling
-`kubectl scale deployment blissfish-app --replicas=3`
+`kubectl scale deployment blissfish-deployment --replicas=3`
 
 ## Expose the service to the outside world
 ### View computing instances 
 `gcloud compute instances list`
 ### Create LB service and assign IP & port support to POD
-`kubectl expose deployment blissfish-app --type=LoadBalancer --port 80 --target-port 8080`
+`kubectl expose deployment blissfish-deployment --type=LoadBalancer --port 80 --target-port 8080`
 ### Verify status of the service
 `kubectl get service`
 
 ## Call the service and  rescale
-`watch -n .5 curl --no-keepalive -i http://35.198.101.241/api`
+`watch -n 1 curl --no-keepalive -i http://[IP]/api`
 ### Change nr of instances in 2nd GCP shell
 `kubectl scale deployment blissfish-app --replicas=1`
 ### Observe how LB routing changes in 1st shell 
@@ -121,11 +121,11 @@ https://console.cloud.google.com
 
 `gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.2`
 ### Start a rolling-update with Kubernetes Engine
-`kubectl set image deployment/blissfish-app blissfish-app=gcr.io/${PROJECT_ID}/echo:0.0.2`
+`kubectl set image deployment/blissfish-deployment blissfish-deployment=gcr.io/${PROJECT_ID}/echo:0.0.2`
 
 ## Clean up
 ### Delete the LB service
-`kubectl delete service blissfish-app`
+`kubectl delete service blissfish-deployment`
 ### Remove container images from registry
 `gcloud container images delete gcr.io/blissfish-191215/echo:0.0.1`
 
@@ -138,6 +138,13 @@ https://console.cloud.google.com
 `docker image rm -f 4f9d0e004754`
 ### Finally delete the cluster
 `gcloud container clusters delete blissfish-cluster`
+
+## Using yaml scripts for deploy, scale etc.
+`cd ~/mcroservices`
+
+`kbectl apply -f deployment-scale.yml`
+
+`kbectl apply -f deployment.yml`
 
 ## Some fun with Spring Boot actuators
 `curl -i http://localhost:8080/health`

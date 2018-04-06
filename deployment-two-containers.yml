@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: blissfish-app
-  replicas: 3 # tells deployment to run 1 pod matching the template
+  replicas: 2 # tells deployment to run 2 pod matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
