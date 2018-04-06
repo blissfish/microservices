@@ -25,14 +25,6 @@ https://console.cloud.google.com
 
 `gcloud compute instances list`
 
-a
-aa
-
-aaa
-
-
-
-
 ## Add blissfish-cluster credentials to kubtctl tool 
 `gcloud container clusters get-credentials blissfish-cluster`
 
