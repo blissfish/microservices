@@ -2,7 +2,7 @@
 ## simple echo service
 This script was created by following the tutorial linked below:
 
-[https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app]
+https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 
 ## Content of service implementation
 POM
