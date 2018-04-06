@@ -18,22 +18,23 @@ https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 * Projektnummer: 768948453873
 
 https://console.cloud.google.com
+## Open the GCP web based command shell
 
 ## Create Kubernetes (K8) cluster
 `gcloud container clusters create blissfish-cluster --num-nodes=3 --zone=europe-west3-a`
-gcloud compute instances list
+`gcloud compute instances list`
 
 ## Add blissfish-cluster credentials to kubtctl tool 
-gcloud container clusters get-credentials blissfish-cluster
+`gcloud container clusters get-credentials blissfish-cluster`
 
 ## Set some env properties
-gcloud config set project blissfish-191215
-gcloud config set compute/zone europe-west3-a
-export PROJECT_ID="$(gcloud config get-value project -q)"
+`gcloud config set project blissfish-191215`
+`gcloud config set compute/zone europe-west3-a`
+`export PROJECT_ID="$(gcloud config get-value project -q)"`
 
-## Code
-
-git clone https://github.com/blissfish/blissfish.git
+## Get the sample code from github
+### verify you are in your home dir in the GCP shell (/home/[user_name])
+`pwd` git clone https://github.com/blissfish/blissfish.git
 cd blissfish/blissfish-samples/
 mvn clean package 
 cd simple-service
