@@ -76,7 +76,7 @@ https://console.cloud.google.com
 ### Create K8 POD deployment using the registered docker image
 `kubectl get pods`
 
-`kubectl run blissfish-web --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
+`kubectl run blissfish-app --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
 ### Verify the deployment status 
 `kubectl get pods`
 
@@ -88,22 +88,22 @@ https://console.cloud.google.com
 `kubectl get pod -o json blissfish-web-[use-NAME-from-get-pods-output]`
 
 ## Vertical scaling
-`kubectl scale deployment blissfish-web --replicas=3`
+`kubectl scale deployment blissfish-app --replicas=3`
 
 ## Expose the service to the outside world
 ### View computing instances 
 `gcloud compute instances list`
 ### Create LB service and assign IP & port support to POD
-`kubectl expose deployment blissfish-web --type=LoadBalancer --port 80 --target-port 8080`
+`kubectl expose deployment blissfish-app --type=LoadBalancer --port 80 --target-port 8080`
 ### Verify status of the service
 `kubectl get service`
 
 ## Call the service and  rescale
 `watch -n .5 curl --no-keepalive -i http://35.198.101.241/api`
 ### Change nr of instances in 2nd GCP shell
-`kubectl scale deployment blissfish-web --replicas=1`
+`kubectl scale deployment blissfish-app --replicas=1`
 ### Observe how LB routing changes in 1st shell 
-`kubectl scale deployment blissfish-web --replicas=3`
+`kubectl scale deployment blissfish-app --replicas=3`
 
 ## Change service version, update, build and re-deploy
 ### Change version attribute in file microservices/echo/src/main/resources/application.yml
@@ -121,11 +121,11 @@ https://console.cloud.google.com
 
 `gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.2`
 ### Start a rolling-update with Kubernetes Engine
-`kubectl set image deployment/blissfish-web blissfish-web=gcr.io/${PROJECT_ID}/echo:0.0.2`
+`kubectl set image deployment/blissfish-app blissfish-app=gcr.io/${PROJECT_ID}/echo:0.0.2`
 
 ## Clean up
 ### Delete the LB service
-`kubectl delete service blissfish-web`
+`kubectl delete service blissfish-app`
 ### Remove container images from registry
 `gcloud container images delete gcr.io/blissfish-191215/echo:0.0.1`
 
