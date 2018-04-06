@@ -29,6 +29,7 @@ public class Application {
 		return echo("Hello World!");
 	}
 
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/api/{message}")
 	public Message echo(@PathVariable String message) {
 		Message data = new Message(counter.incrementAndGet(), message, version);
