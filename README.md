@@ -4,7 +4,7 @@ This script was created by following the tutorial linked below:
 
 https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 
-## Have a look into the code of the service implementation
+## Familiarize yourself with the service implementation
 * microservices/pom.xml
 * microservices/Dockerfile
 * microservices/echo/pom.xml
@@ -37,10 +37,10 @@ https://console.cloud.google.com
 
 ## Navigate to your home dir in the GCP shell (/home/[user_name])
 `pwd` 
-## Get the sample code from github
-`git clone https://github.com/blissfish/blissfish.git`
+## Get the code from github, build & start run the service
+`git clone https://github.com/blissfish/microservices.git`
 
-`cd blissfish/blissfish-samples/`
+`cd blissfish/microservices/`
 
 `mvn clean package`
 
@@ -51,24 +51,18 @@ https://console.cloud.google.com
 ## Open a 2nd shell and verify the service is running
 `curl -i http://localhost:8080/api/`
 
-
 ## Build Docker image
 
-docker build -t gcr.io/${PROJECT_ID}/simple-service:0.0.1 .
+`docker build -t gcr.io/${PROJECT_ID}/simple-service:0.0.1 .`
 
-docker images
-docker ps -s
+`docker images`
+`docker ps -s`
 
-docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/simple-service:0.0.1
+`docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/simple-service:0.0.1`
 
-docker image rm gcr.io/${PROJECT_ID}/simple-service:0.0.1
+`docker image rm gcr.io/${PROJECT_ID}/simple-service:0.0.1`
+
 ## you can use the image id (docker images) to delete an image as well
-
-
-
-
-
-
 ## Push docker image to registry
 
 kubectl get pods
