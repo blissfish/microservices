@@ -28,7 +28,7 @@ public class Application {
 	}
 
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/api/{message}")
+	@RequestMapping(method = RequestMethod.GET, value = "/api2/{message}")
 	public Message echo(@PathVariable String message) {
 		Message data = new Message(counter.incrementAndGet(), message);
 		log.info(data.toString());
