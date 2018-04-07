@@ -25,17 +25,19 @@ https://console.cloud.google.com
 
 `gcloud compute instances list`
 
-## Add blissfish-cluster credentials to kubtctl tool 
-`gcloud container clusters get-credentials blissfish-cluster`
-
 ## Set some env properties
 `gcloud config set project blissfish-191215`
 
 `gcloud config set compute/zone europe-west3-a`
 
 `export PROJECT_ID="$(gcloud config get-value project -q)"`
+
+## Add blissfish-cluster credentials to kubtctl tool 
+`gcloud container clusters get-credentials blissfish-cluster`
+
 ## Clone the repository from github, build & start run the service
 `git clone https://github.com/blissfish/microservices.git`
+
 ### Navigate to your home dir in the GCP shell (/home/[user_name])
 `pwd` 
 `cd microservices/`
