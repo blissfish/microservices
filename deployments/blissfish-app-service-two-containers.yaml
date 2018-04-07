@@ -6,14 +6,18 @@ spec:
   selector:
     matchLabels:
       app: blissfish-app
-  replicas: 1 # tells deployment to run 1 pod matching the template
+  replicas: 1 # tells deployment to run 2 pod matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
         app: blissfish-app
     spec:
       containers:
-      - name: echo
-        image: gcr.io/blissfish-191215/echo:0.0.1
+      - name: service0
+        image: gcr.io/blissfish-191215/service0:0.0.1
         ports:
         - containerPort: 8080
+      - name: service1
+        image: gcr.io/blissfish-191215/service1:0.0.1
+        ports:
+        - containerPort: 8081

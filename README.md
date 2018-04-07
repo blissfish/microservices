@@ -52,13 +52,13 @@ https://console.cloud.google.com
 `curl -i http://localhost:8080/api/`
 
 ## Build the echo Docker image
-`docker build -t gcr.io/${PROJECT_ID}/echo:0.0.1 .`
+`docker build -t gcr.io/${PROJECT_ID}/service0:0.0.1 .`
 ### View generated images
 `docker images`
 ### View running docker processes
 `docker ps -s`
 ### Start the container
-`docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/echo:0.0.1`
+`docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/service0:0.0.1`
 ### Call the service and compare output with running container process data
 `curl -i http://localhost:8080/api/`
 
@@ -67,18 +67,18 @@ https://console.cloud.google.com
 ### First view already registered images
 `gcloud container images list`
 ### Push the image to the Google Container Registry (gcr.io)
-`gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.1`
+`gcloud docker -- push gcr.io/${PROJECT_ID}/service0:0.0.1`
 ### View registered image & meta data
 `gcloud container images list`
 
 `gcloud container images list-tags gcr.io/blissfish-191215/echo`
 
-`gcloud container images describe gcr.io/blissfish-191215/echo:0.0.1`
+`gcloud container images describe gcr.io/blissfish-191215/service0:0.0.1`
 
 ### Create K8 POD deployment using the registered docker image
 `kubectl get pods`
 
-`kubectl run blissfish-deployment --image=gcr.io/${PROJECT_ID}/echo:0.0.1 --port 8080`
+`kubectl run blissfish-deployment --image=gcr.io/${PROJECT_ID}/service0:0.0.1 --port 8080`
 ### Verify the deployment status 
 `kubectl get pods`
 
@@ -119,23 +119,23 @@ https://console.cloud.google.com
 
 `mvn clean package`
 
-`docker build -t gcr.io/${PROJECT_ID}/echo:0.0.2 .`
+`docker build -t gcr.io/${PROJECT_ID}/service0:0.0.2 .`
 
-`gcloud docker -- push gcr.io/${PROJECT_ID}/echo:0.0.2`
+`gcloud docker -- push gcr.io/${PROJECT_ID}/service0:0.0.2`
 ### Start a rolling-update with Kubernetes Engine
-`kubectl set image deployment/blissfish-deployment blissfish-deployment=gcr.io/${PROJECT_ID}/echo:0.0.2`
+`kubectl set image deployment/blissfish-deployment blissfish-deployment=gcr.io/${PROJECT_ID}/service0:0.0.2`
 
 ## Clean up
 ### Delete the LB service
 `kubectl delete service blissfish-deployment`
 ### Remove container images from registry
-`gcloud container images delete gcr.io/blissfish-191215/echo:0.0.1`
+`gcloud container images delete gcr.io/blissfish-191215/service0:0.0.1`
 
-`gcloud container images delete gcr.io/blissfish-191215/echo:0.0.2`
+`gcloud container images delete gcr.io/blissfish-191215/service0:0.0.2`
 
 ### Remove container images from Docker repository
 #### Use either Docker image id or name to delete an image
-`docker image rm gcr.io/${PROJECT_ID}/echo:0.0.1`
+`docker image rm gcr.io/${PROJECT_ID}/service0:0.0.1`
 
 ### Delete the deployment
 `kubectl delete deployment blissfish-deployment`

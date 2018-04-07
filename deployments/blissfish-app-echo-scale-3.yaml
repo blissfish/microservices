@@ -13,7 +13,7 @@ spec:
         app: blissfish-app
     spec:
       containers:
-      - name: echo
-        image: gcr.io/blissfish-191215/echo:0.0.1
+      - name: service0
+        image: gcr.io/blissfish-191215/service0:0.0.1
         ports:
         - containerPort: 8080
