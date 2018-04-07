@@ -7,5 +7,5 @@ ENV APP_JAR_VERSION 0.0.1-SNAPSHOT
 
 COPY target/${APP_JAR_NAME}-${APP_JAR_VERSION}.jar /app.jar
 
-EXPOSE 8082/tcp
+EXPOSE 8081/tcp
 ENTRYPOINT ["java", "-jar", "/app.jar"]
