@@ -63,5 +63,6 @@
 	
 	<modules>
 		<module>echo</module>
+		<module>service0</module>
 	</modules>
 </project>
