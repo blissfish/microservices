@@ -1,5 +1,0 @@
-endpoints:
-  sensitive: false
-
-server:
-  port: 8081
