@@ -147,9 +147,11 @@ https://console.cloud.google.com
 ## Using yaml scripts for deploy, scale etc.
 `cd ~/mcroservices`
 
-`kbectl apply -f deployment-scale.yml`
+`kubectl apply -f deployment-scale.yml`
 
-`kbectl apply -f deployment.yml`
+`kubectl apply -f deployment-two-containers.yml`
+
+`kubectl apply -f deployment.yml`
 
 ## Some fun with Spring Boot actuators
 `curl -i http://localhost:8080/health`
