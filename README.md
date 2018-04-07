@@ -8,7 +8,7 @@ https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 * microservices/pom.xml
 * microservices/Dockerfile
 * microservices/service0/pom.xml
-* microservices/service0/src/main/resources/application.yml
+* microservices/service0/src/main/resources/application.yaml
 * microservices/service0/src/main/java/service0/Application.java
 * microservices/service0/src/main/java/service0/Message.java
 
