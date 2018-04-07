@@ -20,4 +20,4 @@ spec:
       - name: service1
         image: gcr.io/blissfish-191215/service1:0.0.1
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
