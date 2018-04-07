@@ -63,6 +63,7 @@
 	
 	<modules>
 		<module>echo</module>
-		<module>service0</module>
+		<module>service1</module>
+		<module>service2</module>
 	</modules>
 </project>

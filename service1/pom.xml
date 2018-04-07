@@ -5,5 +5,5 @@
     <artifactId>microservices</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>service2</artifactId>
+  <artifactId>service1</artifactId>
 </project>
