@@ -22,7 +22,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/api")
+	@RequestMapping(method = RequestMethod.GET, value = "/api1")
 	public Message echo() {
 		return echo("service1");
 	}
