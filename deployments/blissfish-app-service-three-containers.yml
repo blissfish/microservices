@@ -16,11 +16,11 @@ spec:
       - name: service1
         image: gcr.io/blissfish-191215/service1:0.0.1
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
       - name: service2
         image: gcr.io/blissfish-191215/service2:0.0.1
         ports:
-        - containerPort: 8082
+        - containerPort: 8080
       - name: echo
         image: gcr.io/blissfish-191215/echo:0.0.1
         ports:
