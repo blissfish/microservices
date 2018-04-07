@@ -24,7 +24,7 @@ public class Application {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/api1")
 	public Message echo() {
-		return echo("service1");
+		return echo("Hello service1");
 	}
 
 	

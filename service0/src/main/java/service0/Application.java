@@ -1,4 +1,4 @@
-package service2;
+package service0;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -22,13 +22,13 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/api2")
+	@RequestMapping(method = RequestMethod.GET, value = "/api0")
 	public Message echo() {
-		return echo("Hello service2");
+		return echo("Hello service0");
 	}
 
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/api2/{message}")
+	@RequestMapping(method = RequestMethod.GET, value = "/api0/{message}")
 	public Message echo(@PathVariable String message) {
 		Message data = new Message(counter.incrementAndGet(), message);
 		log.info(data.toString());
