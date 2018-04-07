@@ -141,17 +141,21 @@ https://console.cloud.google.com
 `kubectl delete deployment blissfish-deployment`
 
 `docker image rm -f 4f9d0e004754`
+
+### Remove stopped containers and all unused images
+
+`docker system prune -a`
 ### Finally delete the cluster
 `gcloud container clusters delete blissfish-cluster`
 
 ## Using yaml scripts for deploy, scale etc.
 `cd ~/mcroservices`
 
-`kubectl apply -f deployment-scale.yml`
+`kubectl apply -f deployment-scale.yaml`
 
-`kubectl apply -f deployment-two-containers.yml`
+`kubectl apply -f deployment-two-containers.yaml`
 
-`kubectl apply -f deployment.yml`
+`kubectl apply -f deployment.yaml`
 
 ## Some fun with Spring Boot actuators
 `curl -i http://localhost:8080/health`
