@@ -137,10 +137,9 @@ https://console.cloud.google.com
 #### Use either Docker image id or name to delete an image
 `docker image rm gcr.io/${PROJECT_ID}/service0:0.0.1`
 
+`docker image rm -f [image id]`
 ### Delete the deployment
 `kubectl delete deployment blissfish-deployment`
-
-`docker image rm -f 4f9d0e004754`
 
 ### Remove stopped containers and all unused images
 
