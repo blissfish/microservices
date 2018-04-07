@@ -1,9 +1,0 @@
-endpoints:
-  sensitive: false
-
-server:
-<<<<<<< HEAD
-  port: 8082
-=======
-  port: 8081
->>>>>>> branch 'master' of https://github.com/blissfish/microservices.git
