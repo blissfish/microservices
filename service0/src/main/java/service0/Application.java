@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class Application {
 
+
+	@Value("${version}")
+	private String version;
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 	private final AtomicLong counter = new AtomicLong();
 
@@ -30,7 +33,7 @@ public class Application {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/api0/{message}")
 	public Message echo(@PathVariable String message) {
-		Message data = new Message(counter.incrementAndGet(), message);
+		Message data = new Message(counter.incrementAndGet(), message, version);
 		log.info(data.toString());
 		return data;
 	}
