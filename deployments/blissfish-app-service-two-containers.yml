@@ -18,6 +18,6 @@ spec:
         ports:
         - containerPort: 8081
       - name: service2
-        image: gcr.io/blissfish-191215/service2:0.0.2
+        image: gcr.io/blissfish-191215/service2:0.0.1
         ports:
         - containerPort: 8082
