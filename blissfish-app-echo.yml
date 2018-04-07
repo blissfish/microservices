@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta2 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: blissfish-deployment
+spec:
+  selector:
+    matchLabels:
+      app: blissfish-app
+  replicas: 1 # tells deployment to run 1 pod matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: blissfish-app
+    spec:
+      containers:
+      - name: echo
+        image: gcr.io/blissfish-191215/echo:0.0.1
+        ports:
+        - containerPort: 8080
