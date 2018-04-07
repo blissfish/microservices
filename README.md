@@ -1,5 +1,5 @@
 # Microservices
-## Simple echo service
+## Simple services
 This script was created by following the tutorial linked below:
 
 https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
@@ -7,10 +7,10 @@ https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app
 ## Familiarize yourself with the service implementation
 * microservices/pom.xml
 * microservices/Dockerfile
-* microservices/echo/pom.xml
-* microservices/echo/src/main/resources/application.yml
-* microservices/echo/src/main/java/echo/Application.java
-* microservices/echo/src/main/java/echo/Message.java
+* microservices/service0/pom.xml
+* microservices/service0/src/main/resources/application.yml
+* microservices/service0/src/main/java/service0/Application.java
+* microservices/service0/src/main/java/service0/Message.java
 
 ## Create a GCP Project
 * Projektname: Blissfish
@@ -44,14 +44,14 @@ https://console.cloud.google.com
 
 `mvn clean package`
 
-`cd echo`
+`cd service0`
 
 `mvn spring-boot:run`
 
 ### Open a 2nd shell and verify the service is running
 `curl -i http://localhost:8080/api/`
 
-## Build the echo Docker image
+## Build the service0 Docker image
 `docker build -t gcr.io/${PROJECT_ID}/service0:0.0.1 .`
 ### View generated images
 `docker images`
@@ -71,7 +71,7 @@ https://console.cloud.google.com
 ### View registered image & meta data
 `gcloud container images list`
 
-`gcloud container images list-tags gcr.io/blissfish-191215/echo`
+`gcloud container images list-tags gcr.io/blissfish-191215/service0`
 
 `gcloud container images describe gcr.io/blissfish-191215/service0:0.0.1`
 
@@ -108,14 +108,14 @@ https://console.cloud.google.com
 `kubectl scale deployment blissfish-app --replicas=3`
 
 ## Change service version, update, build and re-deploy
-#### Change version attribute in file microservices/echo/src/main/resources/application.yml
+#### Change version attribute in file microservices/service0/src/main/resources/application.yml
 `version=0.0.2`
 ### Pull the update from github & rebuild
 `cd /home/[user_name]/microservices`
 
 `git pull`
 
-`cd echo/`
+`cd service0/`
 
 `mvn clean package`
 
