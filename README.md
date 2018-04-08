@@ -124,6 +124,10 @@ https://console.cloud.google.com
 `gcloud docker -- push gcr.io/${PROJECT_ID}/service0:0.0.2`
 ### Start a rolling-update with Kubernetes Engine
 `kubectl set image deployment/blissfish-deployment blissfish-deployment=gcr.io/${PROJECT_ID}/service0:0.0.2`
+### Kill a POD
+`kubectl get pods`
+
+`kubectl delete pod blissfish-deployment-XXX --now`
 
 ## Clean up
 ### Delete the LB service
