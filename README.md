@@ -49,7 +49,7 @@ https://console.cloud.google.com
 `mvn spring-boot:run`
 
 ### Open a 2nd shell and verify the service is running
-`curl -i http://localhost:8080/api/`
+`curl -i http://localhost:8080/api0/`
 
 ## Build the service0 Docker image
 `docker build -t gcr.io/${PROJECT_ID}/service0:0.0.1 .`
@@ -60,7 +60,7 @@ https://console.cloud.google.com
 ### Start the container
 `docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/service0:0.0.1`
 ### Call the service and compare output with running container process data
-`curl -i http://localhost:8080/api/`
+`curl -i http://localhost:8080/api0/`
 
 `docker ps -s`
 ## Push the Docker service image to the registry
@@ -101,7 +101,7 @@ https://console.cloud.google.com
 `kubectl get service`
 
 ## Call the service and  rescale
-`watch -n 1 curl --no-keepalive -i http://[IP]/api`
+`watch -n 1 curl --no-keepalive -i http://[IP]/api0`
 ### Change nr of instances in 2nd GCP shell
 `kubectl scale deployment blissfish-app --replicas=1`
 ### Observe how LB routing changes in 1st shell 
